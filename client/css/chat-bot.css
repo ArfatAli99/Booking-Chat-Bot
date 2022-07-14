@@ -1,0 +1,2979 @@
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap');
+    body {font-family: 'Poppins', sans-serif !important;}
+    * {box-sizing: border-box;}
+    #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    /* Button used to open the chat form - fixed at the bottom of the page */
+    .open-button {
+        /* background-color: rgb(17, 158, 158); */
+        color: white;
+        padding: 17px 20px 16px 58px;
+        border: none;
+        cursor: pointer;
+        opacity: 1;
+        position: fixed;
+        bottom: 0;
+        right: 70px;
+        width: 80px;
+        height: 80px;
+        text-align: left;
+        border-radius: 64px 64px 64px 64px;
+        z-index: 999;
+        /* background-image: url(images/Small-SMile.png); */
+        background-image: url(../images/round_chat.png);
+        background-size: 70px 70px;
+        background-repeat: no-repeat;
+        background-position: 5px 5px;
+    }
+    .chat-head {
+        background: rgb(17, 158, 158);
+        padding: 30px 15px;
+        text-align: center;
+        /*margin: -10px -11px 10px;*/
+    }
+    .chat-head h1 {
+        font-size: 20px;
+        margin: 15px 0;
+        color: #fff;
+    }
+    .chat-head label {
+        font-size: 15px;
+        color: #fff;
+        font-weight: 300;
+    }
+    /* The popup chat - hidden by default */
+    .chat-popup {
+        display: none;
+        position: fixed;
+        bottom: -18px;
+        right: 28px;
+        z-index: 9999;
+        -webkit-box-shadow: 0 0 10px 0 rgba(22,45,61,.1);
+        box-shadow: 0 0 10px 0 rgba(22,45,61,.1);
+    }
+    .form-container textarea {
+        position: relative;
+    }
+    .power-by {
+        background: rgba(17, 158, 158, 0.18);
+        margin: -10px -10px 10px;
+        color: rgba(47, 46, 46, 0.5);
+        font-size: 12px;
+        text-align: center;
+        padding: 11px 10px;
+    }
+    .form-container button.btn.cancel {
+        background: no-repeat;
+        padding: 0;
+        width: auto;
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+        z-index: 99;
+        right: 5px;
+        background-color: #fff;
+        width: 25px;
+        height: 25px;
+        color: rgb(17, 158, 158);
+        opacity: 1;
+        font-weight: 600;
+        border-radius: 50%;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .form-container textarea:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        background: url(../images/mini-smile.png) no-repeat;
+        width: 30px;
+        height: 30px;
+    }
+
+
+    /* Add styles to the form container */
+    .form-container {
+    max-width: 330px;
+    padding: 10px;
+    background-color: white;
+    }
+
+    /* Full-width textarea */
+    .form-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #fff;
+        resize: none;
+        min-height: 150px;
+        color: rgb(47, 46, 46);
+        font-size: 15px;
+    }
+
+    /* When the textarea gets focus, do something */
+    .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+    }
+
+    /* Set a style for the submit/send button */
+    .form-container .btn {
+        background-color: rgb(17, 158, 158);
+        color: white;
+        padding: 4px 10px;
+        border: none;
+        cursor: pointer;
+        width: auto;
+        margin-bottom: 10px;
+        opacity: 0.8;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+    background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+    }
+
+    /* Add to center the page */
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        align-self: center;
+    }
+
+
+
+/*ATG CHATBOT CSS*/
+
+/*need to place for open-gif*/
+
+/*.chat-box {
+    background-color: #f4f4f4;
+    box-shadow: 0 0 6px #ddd;
+    width: 360px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: none;
+    z-index: 999;
+}
+.chat-head {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+.chat-body {
+    min-height: 420px;
+    overflow: auto;
+    max-height: calc(100vh - 280px);
+        padding: 15px 0;
+}
+.delay-time:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+}
+ul.gif-list {
+    list-style: none;
+    background-color: #fff;
+    padding: 0;
+}
+.gif-list li {
+    width: 31.5%;
+    margin: 0 5px 0 0;
+}
+.gif-box {
+    width: 100px;
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    display: none;
+    top: 0;
+    left: 0;
+    margin: auto;
+    height: 100px;
+}
+.gif-list li img {
+    width: 100px;
+    height: 100px;
+}
+.chat-footer {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+.chat-input input.chat-sm-input {
+    width: 100%;
+    height: 50px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    border: none;
+    color: #a8a8a8;
+    outline: 0;
+}
+.open-gif:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+}
+.chat-footer {
+    display: flex;
+    align-items: center;
+}
+.chat-input {
+    width: 80%;
+}
+.chat-icons {
+    width: 20%;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+a {
+    text-decoration: none;
+}
+.voice-btn img {
+    max-width: 24px;
+    opacity: 0.6;
+    max-height: 24px;
+}
+.close-chat {
+    margin-left: auto;
+}
+.send-btn svg {
+     color: #a8a8a8;
+}
+button.chat-button {
+    background-color: #0f62fe;
+    border: 1px solid #0f62fe;
+    color: #fff;
+    padding: 9px 11px;
+    outline: 0;
+    cursor: pointer;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+button.btn.btn-default {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #555;
+    min-width: 153px;
+    cursor: pointer;
+}
+button.btn.btn-default:hover {
+    background-color: #103F54;
+    color: #fff;
+    border-color: #103F54;
+}
+input#browser {
+    width: 100%;
+    height: 30px;
+    padding: 0 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.loading-img {
+    display: none;
+}
+.chat-alert {
+    border: 1px solid #da3232;
+    padding: 10px 15px;
+    background-color: #da323294;
+    color: #fff;
+    font-family: sans-serif;
+    line-height: 23px;
+    font-size: 15px;
+    position: absolute;
+    top: 68px;
+    width: 95%;
+    left: 0;
+    box-sizing: border-box;
+    right: 0;
+    margin: auto;
+    display: none;
+    text-align: center;
+}
+.user-msg.sent {
+    text-align: right;
+}
+.user-msg p {
+    background-color: #103F54;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 20px 10px 20px;
+    border-radius: 15px 15px 0px 15px;
+    font-size: 14px;
+    font-family: arial;
+}
+.user-msg.sent p {
+     border-radius: 15px 15px 15px 0px;
+     background-color: #E1C233;
+}
+.msg-body {
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.msg-row {
+    border-bottom: 1px solid #dddddd40;
+}
+.loading-img img {
+    max-width: 80px;
+}
+
+.chat-minimize-button{
+    display: none;
+    background-color: grey;
+    border: 1px solid #0f62fe;
+    color: #fff;
+    padding: 9px 11px;
+    outline: 0;
+    cursor: pointer;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.delay-time .chat-body:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+}
+a#mic-off {
+    display: none;
+}
+a#mic-off  img {
+    opacity: 1;
+}
+.audio-start a#mic-off {
+    display: block;
+}
+.audio-start a#mic-on {
+    display: none;
+}
+.msg-body .select2-container--default .select2-selection--single {
+    border: 1px solid #ddd;
+    font-size: 12px;
+    margin-bottom: 10px;
+    max-width: 315px;
+    width: 100%;
+    min-width: 300px;
+}
+.msg-body .select2-container--default {
+    max-width: 315px;
+    min-width: 300px;
+}
+.msg-row .datepicker.datepicker-inline, .msg-row .datepicker.datepicker-inline table {
+    width: 100%;
+}
+.msg-row .datepicker th.datepicker-switch {
+    padding: 5px 0 20px;
+}
+.msg-row .datepicker th.dow, .msg-row .datepicker td {
+    font-size: 14px;
+}
+input#timePicker {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+button#pickerTrigger {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    color: #555;
+}
+
+.msg-row div#datepicker {
+    background-color: #fff;
+    margin: 0 0 10px 0;
+    box-shadow: 0 0 5px #ddd;
+}
+
+select#selectOptions {
+    width: 100%;
+    height: 30px;
+    padding: 0 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}*/
+
+
+
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+    #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    /* Button used to open the chat form - fixed at the bottom of the page */
+    .open-button {
+        /* background-color: rgb(17, 158, 158); */
+        color: white;
+        padding: 17px 20px 16px 58px;
+        border: none;
+        cursor: pointer;
+        opacity: 1;
+        position: fixed;
+        bottom: 0;
+        right: 70px;
+        width: 80px;
+        height: 80px;
+        text-align: left;
+        border-radius: 64px 64px 64px 64px;
+        z-index: 999;
+        /* background-image: url(images/Small-SMile.png); */
+        background-image: url(../images/round_chat.png);
+        background-size: 70px 70px;
+        background-repeat: no-repeat;
+        background-position: 5px 5px;
+    }
+    .chat-head {
+        background: rgb(17, 158, 158);
+        padding: 30px 15px;
+        text-align: center;
+        /*margin: -10px -11px 10px;*/
+    }
+    .chat-head h1 {
+        font-size: 20px;
+        margin: 15px 0;
+        color: #fff;
+    }
+    .chat-head label {
+        font-size: 15px;
+        color: #fff;
+        font-weight: 300;
+    }
+    /* The popup chat - hidden by default */
+    .chat-popup {
+        display: none;
+        position: fixed;
+        bottom: -18px;
+        right: 28px;
+        z-index: 9999;
+        -webkit-box-shadow: 0 0 10px 0 rgba(22,45,61,.1);
+        box-shadow: 0 0 10px 0 rgba(22,45,61,.1);
+    }
+    .form-container textarea {
+        position: relative;
+    }
+    .power-by {
+        background: rgba(17, 158, 158, 0.18);
+        margin: -10px -10px 10px;
+        color: rgba(47, 46, 46, 0.5);
+        font-size: 12px;
+        text-align: center;
+        padding: 11px 10px;
+    }
+    .form-container button.btn.cancel {
+        background: no-repeat;
+        padding: 0;
+        width: auto;
+        display: inline-block;
+        position: absolute;
+        top: 5px;
+        z-index: 99;
+        right: 5px;
+        background-color: #fff;
+        width: 25px;
+        height: 25px;
+        color: rgb(17, 158, 158);
+        opacity: 1;
+        font-weight: 600;
+        border-radius: 50%;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .form-container textarea:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        background: url(../images/mini-smile.png) no-repeat;
+        width: 30px;
+        height: 30px;
+    }
+
+
+    /* Add styles to the form container */
+    .form-container {
+    max-width: 330px;
+    padding: 10px;
+    background-color: white;
+    }
+
+    /* Full-width textarea */
+    .form-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #fff;
+        resize: none;
+        min-height: 150px;
+        color: rgb(47, 46, 46);
+        font-size: 15px;
+    }
+
+    /* When the textarea gets focus, do something */
+    .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+    }
+
+    /* Set a style for the submit/send button */
+    .form-container .btn {
+        background-color: rgb(17, 158, 158);
+        color: white;
+        padding: 4px 10px;
+        border: none;
+        cursor: pointer;
+        width: auto;
+        margin-bottom: 10px;
+        opacity: 0.8;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+    background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+    }
+
+    /* Add to center the page */
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        align-self: center;
+    }
+
+
+
+/*ATG CHATBOT CSS*/
+
+/*need to place for open-gif*/
+.fixed-top {
+    z-index: 999;
+}
+.chat-box {
+    background-color: #f4f4f4;
+    box-shadow: 0 0 6px #ddd;
+    width: 100%;
+    position: fixed;
+    right: 0;
+    bottom: 0px;
+    display: none;
+    z-index: 999;
+    height: 97%;
+    top: 10px;
+    left: 0;
+    margin: 0 auto 0;
+    max-width: 1300px;
+}
+.chat-box:before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.chat-head {
+    background-color: #103F54;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    position: relative;
+}
+.chat-head a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+}
+.chat-body {
+    /* min-height: 420px; */
+    overflow: auto;
+    max-height: calc(100vh - 82px);
+    padding: 15px 0;
+    background-color: #fff;
+    position: relative;
+    height: 100%;
+    background-image: url(/images/chat-bg-img.png);
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+.add-footer .chat-body {
+    max-height: calc(100vh - 142px); 
+}
+.chat-box:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 71px;
+    bottom: 0;
+    /* background-color: #fff; */
+}
+.reserve-button {
+    margin-bottom: 20px;
+}
+.delay-time:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+}
+ul.gif-list {
+    list-style: none;
+    background-color: #fff;
+    padding: 0;
+}
+.gif-list li {
+    width: 31.5%;
+    margin: 0 5px 0 0;
+}
+.gif-box {
+    width: 100px;
+    margin: auto;
+    position: sticky;
+    bottom: 0;
+    right: 0px;
+    display: none;
+    top: 0;
+    left: 0;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.97);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    
+}
+.chat-box.audio-start .chat-body {
+    overflow-x: hidden;
+}
+.gif-box ul.gif-list {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.gif-box.gif-box-on li {
+    width: 100%;
+}
+/*.gif-list li img {
+    width: 100px;
+    height: 100px;
+}*/
+.chat-input input.chat-sm-input {
+    width: 100%;
+    height: 60px;
+    padding: 0px 30px;
+    box-sizing: border-box;
+    color: #000;
+    outline: 0;
+    border-radius: 50px;
+    text-shadow: 0 0 4px #ddd;
+    border: 1px solid #e4e4e4;
+}
+.voice-btn {
+    background-color: #53c8f4;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+}
+.voice-btn i {
+    margin-top: 10px;
+}
+.send-btn {
+    background-color: #023249;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+}
+.open-gif:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.chat-footer {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    /* border: 1px solid #103F54; */
+    padding: 0px 10px 10px;
+    background-color: #fff;
+    z-index: 9;
+}
+.gif-box.gif-box-on span {
+    position: relative;
+    left: 118px;
+    border: 2px solid #103F54;
+    width: 30px;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 50%;
+    top: 4px;
+    color: #103F54;
+    height: 30px;
+}
+.audio-start a#mic-off {
+    display: none !important;
+    text-decoration: none;
+}
+.chat-box.audio-start .gif-box.gif-box-on a#mic-off {
+    display: block !important;
+}
+.chat-input {
+    width: 100%;
+}
+.gif-box.gif-box-off li {
+    width: 100%;
+}
+.chat-input {
+    width: 100%;
+}
+.chat-icons {
+    width: auto;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    right: 20px;
+}
+.chat-icons a {
+    margin: 0 0 0 10px;
+}
+a {
+    text-decoration: none;
+}
+.voice-btn img {
+    max-width: 24px;
+    opacity: 0.6;
+    max-height: 24px;
+}
+.right-head-controller {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.right-head-controller a {
+    margin: 0 0 0 10px;
+}
+.send-btn svg {
+     color: #a8a8a8;
+}
+button.chat-button {
+    background-color: #0f62fe;
+    border: 1px solid #0f62fe;
+    color: #fff;
+    padding: 9px 11px;
+    outline: 0;
+    cursor: pointer;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+button.btn.btn-default {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #555;
+    min-width: 153px;
+    cursor: pointer;
+}
+button.btn.btn-default:hover {
+    background-color: #103F54;
+    color: #fff;
+    border-color: #103F54;
+}
+input#browser {
+    width: 100%;
+    height: 30px;
+    padding: 0 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.loading-img {
+    display: none;
+    text-align: right;
+}
+.chat-alert {
+    border: 1px solid #da3232;
+    padding: 10px 15px;
+    background-color: #da323294;
+    color: #fff;
+    font-family: sans-serif;
+    line-height: 23px;
+    font-size: 15px;
+    position: absolute;
+    top: 68px;
+    width: 95%;
+    left: 0;
+    box-sizing: border-box;
+    right: 0;
+    margin: auto;
+    display: none;
+    text-align: center;
+    z-index: 99;
+}
+.user-msg.receive {
+    text-align: right;
+}
+.user-msg p {
+    background-color: #747474;
+    color: #fff;
+    display: inline-block;
+    padding: 15px 20px 15px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-family: arial;
+    box-shadow: 0 5px 7px rgb(0 0 0 / 20%);
+}
+.user-msg.sent p {
+    background-color: 023249;
+    color: #fff;
+}
+.msg-body {
+    padding: 0 15px 75px;
+    width: 100%;
+    box-sizing: border-box;
+}
+/*.msg-row {
+    border-bottom: 1px solid #dddddd40;
+}*/
+.loading-img img {
+    max-width: 80px;
+}
+
+.chat-minimize-button{
+    display: none;
+    background-color: grey;
+    border: 1px solid #0f62fe;
+    color: #fff;
+    padding: 9px 11px;
+    outline: 0;
+    cursor: pointer;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+button#pickerTrigger0 {
+    background-color: #103F54;
+    border: 1px solid #103F54;
+    color: #fff;
+    position: absolute;
+    left: 445px;
+    padding: 6.3px 10px;
+}
+
+.delay-time .chat-body:before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255, 0.8);
+    top: 0px;
+    z-index: 99;
+}
+a#mic-off {
+    display: none;
+}
+a#mic-off  img {
+    opacity: 1;
+}
+.audio-start a#mic-off {
+    display: block;
+}
+.audio-start a#mic-on {
+    display: none;
+}
+.msg-body .select2-container--default .select2-selection--single, .timePicker {
+    border: 1px solid #ddd;
+    font-size: 12px;
+    margin-bottom: 10px;
+    max-width: 540px;
+    width: 100%;
+    height: 35px;
+    background-color: #fff;
+    padding: 0 10px;
+    min-width: 540px;
+}
+.msg-body .select2-container--default .select2-selection--single {
+    padding: 3px 0 0;
+}
+.msg-body .select2-container--default {
+    max-width: 600px;
+    min-width: 540px;
+}
+.msg-row .datepicker.datepicker-inline, .msg-row .datepicker.datepicker-inline table {
+    max-width: 500px;
+    margin: auto;
+    width: 100%;
+    background-color: #fff;
+    padding: 0;
+}
+.msg-row .datepicker th.datepicker-switch, .msg-row .datepicker th.prev, .msg-row .datepicker th.next {
+    padding: 5px 0 6px;
+    background-color: #103F54;
+    color: #fff;
+    border-radius: 0;
+    visibility: visible;
+}
+.msg-row .datepicker th.dow, .msg-row .datepicker td {
+    font-size: 14px;
+    border: 1px solid #ddd;
+}
+.msg-row {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 15px 0;
+}
+.tab-pane span.no-found {
+    padding: 10px 20px;
+    margin: 20px 0;
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    display: block;
+}
+input#timePicker {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+button#pickerTrigger {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    color: #555;
+}
+
+.msg-row div#datepicker {
+    /* background-color: #fff; */
+    margin: 0 0 10px 0;
+    /* box-shadow: 0 0 5px #ddd; */
+}
+
+select#selectOptions {
+    width: 100%;
+    height: 30px;
+    padding: 0 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Low fare flight search css */
+
+.flight-row {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px #ddd;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.flight-column {
+    width: 20%;
+}
+.flight-column label {
+    font-weight: 600;
+    margin: 0 0px 8px 0;
+    display: block;
+    text-align: center;
+}
+.flight-column span {
+    color: #999;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+.flight-row:hover {
+    background-color: #103F54;
+    cursor: pointer;    
+}
+.flight-row:hover .flight-column label, .flight-row:hover .flight-column span {
+    color: #fff;
+}
+.flight-box {
+    display: none;
+}
+.accordion-list {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+li.accordion-row a {
+    padding: 15px 20px 15px 32px;
+    display: block;
+    text-decoration: none;
+    background-color: #fafafa;
+    box-shadow: 0 0 5px #ddd;
+    color: #555;
+    font-size: 16px;
+}
+.accordion-row {
+    margin: 0 0 10px;
+    position: relative;
+}
+.right-fare {	
+    position: absolute;	
+    right: 0;	
+    top: 45px;	
+    z-index: 9;	
+}
+.right-fare label {	
+    font-size: 15px;	
+    font-weight: 600;	
+    display: block;	
+    text-align: center;	
+}
+.right-fare label span {
+    color: #999;
+}
+.right-fare button.select-btn {	
+    margin: 0;	
+}
+button.select-btn {
+    background-color: #103F54;
+    border: 1px solid #103F54;
+    color: #fff;
+    padding: 6px 10px;
+    display: inline-block;
+    font-weight: 600;
+    border-radius: 4px;
+    margin: 0 0 0 20px;
+    cursor: pointer;
+}
+.flight-option {
+    font-weight: 600;
+    color: #555;
+    margin: 0 0 20px 0;
+    display: block;
+    border-top: 1px solid #ddd;
+    padding-top: 25px;
+}
+.option-row {	
+    padding-right: 110px;	
+    position: relative;	
+}	
+.accordion-row > .flight-career {	
+    display: none;	
+}	
+.flight-duration-info {	
+    display: flex;	
+    padding: 0 0 0 20px;	
+}	
+.flight-duration-column {	
+    width: 60%;	
+}	
+.flight-duration-column span.flight-tm {	
+    color: #103F54;	
+    font-size: 15px;	
+    font-weight: 600;	
+}	
+.flight-duration-column span.flight-city {	
+    color: #676767;	
+    font-size: 15px;	
+}	
+.flight-duration-column p {	
+    margin: 0;	
+}	
+.flight-duration-column .flight-career {	
+    position: static;	
+}	
+.flight-duration-column .flight-career h5, .flight-duration-column .flight-career h5 span {	
+    color: #103F54;	
+    font-size: 16px;	
+    font-weight: 600;	
+}	
+ul.accordion-list li.accordion-row {
+    display: block;
+    margin-bottom: 10px;
+}
+li.accordion-row:first-child .flight-option {
+    border: none;
+    padding: 0;
+}
+.center-flight-city {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.flight-column.inline-column {
+    width: 60%;
+    text-align: center;
+}
+.flight-career {
+    position: absolute;
+    display: flex;
+    right: 23%;
+    top: 15px;
+}
+.flight-career h5 {
+    margin: 0;
+    min-width: 150px;
+    font-size: 15px;
+}
+.flight-career span {
+    color: #999;
+    font-size: 14px;
+    margin: 0 0 0 4px;
+}
+.chat-loadding {
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: calc(100% - 25px);
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    left: 0;
+}
+.accordion-box-scroll {
+    padding: 20px 20px;
+    background-color: #fff;
+    box-shadow: 5px 3px 10px #999;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+.flight-row.responsive-row {
+    display: none;
+}
+.travel-form-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #103F54;
+    border-left: 8px solid #53c8f4;
+    border-radius: 0 20px 0px 0;
+    padding: 20px 20px  10px;
+    margin-bottom: 15px;
+}
+.form-group.travel-form-group {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.form-group.travel-form-group:nth-child(2n) {
+    margin-left: auto;
+}
+.form-group.travel-form-group label {
+    min-width: 170px;
+    color: #fff;
+}
+.form-group.travel-form-group input {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+}
+.form-group.travel-form-group input:focus {
+    border-color: #fff;
+    outline: 0;
+}
+.msg-body .form-group.travel-form-group .select2-container--default, .msg-body .form-group.travel-form-group .select2-container--default .select2-selection--single {
+    max-width: 100%;
+    min-width: inherit;
+    border: none;
+}
+.msg-body .form-group.travel-form-group .select2-container--default .select2-selection--single {
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    outline: 0;
+}
+.msg-body .form-group.travel-form-group .select2-container--default {
+    max-width: 100%;
+    min-width: inherit;
+    width: 100% !important;
+    border: none;
+}
+.user-msg.receive .panel.panel-default {
+    background: transparent;
+    border: none;
+}
+.travel-form-group .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+    padding: 0;
+}
+.travel-form-group .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #fff transparent transparent transparent;
+}
+.form-group-row {
+    width: 100%;
+    margin: 0 0 10px 0;
+    display: flex;
+}
+.form-group-row h3 {
+    color: #fff;
+}
+.form-group.travel-form-group button.btn.btn-default {
+    width: auto;
+    display: inline-block;
+    background-color: #53c8f4;
+    color: #fff;
+    border: 1px solid #53c8f4;
+    padding: 10px 10px;
+    font-size: 17px;
+    text-transform: capitalize;
+    min-width: 180px;
+    margin: 30px 0 0;
+}
+li.accordion-row .option-row:before {	
+    border-color: #103F54 transparent transparent transparent;	
+    border-style: solid;	
+    border-width: 6px 5px 0 5px;	
+    height: 0;	
+    left: 27px;	
+    margin-left: -4px;	
+    margin-top: -2px;	
+    position: absolute;	
+    top: 25px;	
+    width: 0;	
+    content: "";	
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #103F54 !important;
+    color: white !important;
+}
+.msg-body .panel.panel-default {
+    border: none;
+    background: transparent;
+}
+.selected-tab .flight-box.active {
+    display: none !important;
+}
+span.required-alert {
+    position: absolute;
+    right: 0;
+    left: auto;
+    width: auto;
+    color:  #920303;
+    bottom: -20px;
+}
+.cst-divider {
+    width: 100%;
+}
+.form-group.travel-form-group.required input {
+    border-color: #920303;
+}
+.cst-divider + .form-group.travel-form-group + .form-group.travel-form-group + .form-group.travel-form-group + .form-group.travel-form-group {
+    margin-left: auto;
+}
+.cst-divider + .form-group.travel-form-group + .form-group.travel-form-group + .form-group.travel-form-group {
+    margin-left: 0;
+}
+.cst-divider + .form-group.travel-form-group + .form-group.travel-form-group {
+    margin-left: auto;
+}
+.cst-divider + .form-group.travel-form-group {
+    margin-left: 0;
+}
+.form-group.travel-form-group input[disabled] {
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+}
+.form-group.travel-form-group label.disable_field {
+    color: rgba(255, 255, 255, 0.5);
+}
+.final_result .flight-row {
+    flex-wrap: wrap;
+    padding: 20px 20px;
+}
+.final_result .flight-row p {
+    width: 100%;
+}
+.final_result .flight-row label {
+    min-width: 190px;
+    text-align: left;
+    padding: 0 30px 0 0px;
+}
+.final_result div.flight1-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+.final_result .flight-row {
+    flex-wrap: wrap;
+    padding: 20px 20px;
+    width: 50%;
+}
+.final_result .flight-row.end-div {
+    width: 100%;
+}
+span.hr_test {
+    display: block;
+    width: 100%;
+    border-top: 2px solid #fff;
+    margin: 15px 0;
+}
+.information-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+.information-box .info-sm-box {
+    width: 25%;
+    background-color: #eeeeeeb8;
+    padding: 5px;
+}
+.information-box .info-sm-box label {
+    min-width: 130px;
+}
+.flight_detail_row {
+    width: 100%;
+    display: flex;
+}
+.flight_detail_row .info-sm-box {
+    text-align: center;
+}
+.flight_detail_row .info-sm-box label {
+    display: block;
+    text-align: center;
+}
+.information-box > .info-sm-box {
+    width: 50%;
+    background-color: #eee;
+    text-align: center;
+    border-right: 5px solid #f4f4f4;
+    border-left: 5px solid #f4f4f4;
+}
+
+.flight-information {
+    width: 100%;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+}
+.flight-info-head {
+    display: flex;
+    align-items: center;
+    background-color: #fafafa;
+    /* border-bottom: 1px solid #ddd; */
+    padding: 0;
+    margin: 0 0 15px 0;
+    justify-content: center;
+}
+.flight-info-head-column.left {
+    padding: 10px 0;
+    width: 25%;
+    border-right: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.flight-info-detail {
+    padding: 20px 15px 20px;
+    display: flex;
+    align-items: center;
+    width: 75%;
+}
+.flight-info-detail-column {
+    width: 25%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 10px;
+    border-right: 1px solid #ddd;
+    font-weight: 600;
+}
+.flight-info-detail-column:last-child {
+    border: none;
+}
+.flight-info-detail-column strong {
+    display: block;
+    margin: 0 0 0px;
+}
+.flight-info-head strong, .flight-info-detail-column strong, .flight-info-detail-column span, .flight-info-head-column span {
+    font-family: arial;
+}
+.flight-info-detail-column span, .flight-info-head-column span {
+    font-size: 14px;
+    color: #999;
+}
+.flight-info-detail-column span {
+    font-weight: 400;
+}
+.flight-info-head-column strong {
+    color: #49c1e8;
+    font-size: 20px;
+    margin: 0 20px 0 0;
+}
+.flight-info-head-column.left strong span {
+    background: transparent;
+}
+.flight-info-head-column.left span {
+    background: url(https://i.ibb.co/qYmbHQz/right-arrow.png);
+    min-width: 70px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 16px;
+    background-size: contain;
+    background-position: center;
+}
+a.repeaticon {
+    color: #fff;
+    font-size: 18px;
+}
+.right-head-controller a.minimize-chat-box {
+    position: relative;
+    top: 2px;
+    margin: 0 0 0 18px;
+}
+.right-head-controller a.minimize-chat-box svg {
+    width: 25px;
+    color: #fff;
+}
+.chat-icons a svg {
+    margin: 0px 0 0 2px;
+    color: #fff;
+}
+.chat-logo-relaunch .chat-loadding {
+    display: flex !important;
+}
+.fare-count {
+    background-color: #eaeaea;
+    text-align: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.fare-count strong {
+    width: 33%;
+}
+.fare-count strong {
+    font-size: 16px;
+}
+.fare-count strong span {
+    font-weight: 500;
+}
+.dtpicker-cont .dtpicker-header .dtpicker-title {
+    color: #000;
+    font-size: 20px;
+    background-color: #e6e6e6;
+    padding: 10px 0;
+}
+.dtpicker-cont .dtpicker-header .dtpicker-value {
+    color: #103F54;
+    color: #fff;
+}
+.dtpicker-cont .dtpicker-buttonCont .dtpicker-button {
+    background: #103F54;
+    color: #fff;
+}
+.dtpicker-cont .dtpicker-buttonCont .dtpicker-button:hover {
+    color: #fff;
+}
+.dtpicker-cont .dtpicker-components .dtpicker-compValue, .dtpicker-cont .dtpicker-components .dtpicker-compValue {
+    color: #000;
+}
+.dtpicker-cont .dtpicker-header .dtpicker-close {
+   display: none;
+}
+.hotel-text h3 {
+    color: #196173e0;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 10px;
+}
+.flight-info-detail-column span {
+    display: block;
+    margin: 0 0 0px 0;
+}
+.hotel-text p {
+    color: #999;
+    font-size: 16px;
+}
+.hotel-text ul.info-list {
+    padding: 0;
+    list-style: none;
+}
+.inner-left-text .hotel-text i {
+    margin: 0 8px 0 0;
+    font-size: 16px;
+}
+.modal-body ul {
+    max-height: 380px;
+    overflow: auto;
+    padding: 0 0 0 30px;
+}
+.hotel-row {
+    display: flex;
+    background-color: #efefef;
+    padding: 20px 20px;
+    margin: 20px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+.hotel-column.left {
+    width: 70%;
+}
+.hotel-column.right.price {
+    width: 30%;
+}
+.overwrite-price, .actual-price {
+    text-align: right;
+}
+.actual-price strong {
+    font-size: 30px;
+}
+.hotel-text ul.info-list li i {
+    margin: 0 12px 0 0;
+}
+.hotel-text ul.info-list li {
+    color: #444;
+    font-size: 16px;
+    margin: 0 0 8px 0;
+}
+.read-more a {
+    color: #196173e0;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 10px 0 0;
+    display: inline-block;
+}
+.price-dropdown {
+    text-align: right;
+    margin: 15px 0 0;
+}
+.price-dropdown button#dropdownMenuButton {
+    background-color: #103F54;
+    color: #fff;
+    padding: 10px 15px;
+    text-align: left;
+    min-width: 180px;
+}
+.dropdown-menu a.dropdown-item {
+    display: block;
+    padding: 7px 20px;
+    color: #000;
+}
+.dropdown-menu a.dropdown-item:hover {
+    text-decoration: none;
+    background-color: #103F54;
+    color: #fff;
+}
+.price-dropdown .dropdown {
+    display: inline-block;
+}
+.price-dropdown .price-button {
+    background-color: #103F54;
+    color: #fff;
+    max-width: 200px;
+    float: right;
+    padding: 10px 10px;
+    height: auto;
+    text-align: center;
+}
+ul.reservation-list {
+    padding: 5px 80px 5px 0px;
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+}
+ul.reservation-list li {
+    margin: 0 0 10px 0;
+}   
+ul.reservation-list li label {
+    margin: 0 0 0 12px;
+    font-weight: 400;
+}   
+ul.reservation-list {
+    padding: 15px 0 5px 23px;
+    list-style: none;
+}
+.user-msg.receive button.btn.btn-success.btn-sm {
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: #3e3a0d;
+    font-style: italic;
+    font-weight: 600;
+}
+.chat-body .modal-header, .chat-modal .modal-header {
+    background-color: #103F54;
+    color: #fff;
+}
+
+.chat-body .modal-header button.close, .chat-modal .modal-header button.close {
+    color: #fff;
+    opacity: 1;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
+.chat-body .modal-footer, .chat-modal .modal-footer {
+    background-color: #103F54;
+}
+.profile-info-modal label {
+    min-width: 85px;
+}
+.modal-footer button.btn.btn-default:hover {
+    background: #fff;
+    color: #000;
+}
+.hotel-column.left {
+    display: flex;
+    width: 100%;
+}
+.inner-right-button {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+.inner-left-text {
+    width: 55%;
+    padding-left: 70px;
+}
+.inner-right-button .read-more {
+    text-align: right;
+}
+.inner-left-text .hotel-text p {
+    display: inline-block;
+    margin: 0 30px 0 0;
+    font-size: 14px;
+    color: #555;
+    width: 100%;
+}
+.inner-left-text .hotel-text span {
+    display: block;
+    color: #000;
+    margin: 10px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+.inner-right-button button.btn.btn-sm.btn-success {
+    background-color: #103F54;
+    color: #fff;
+    border-color: #ddd;
+    margin: 0 2px 4px 0px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+button.price-button.disableIt {
+    background-color: #53c8f4;
+    border: 1px solid #53c8f4;
+    color: #fff;
+    padding: 4px 20px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+.modal-body ul table {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    margin: 0 0 15px -20px;
+}
+.modal-body ul table tr td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+}
+.modal-body ul table td {
+    border: none;
+    padding: 6px 15px;
+}
+.hotel_detail_div {
+    margin: 0 0 12px 0;
+}
+
+.inner-flight-box {
+    display: flex;
+    align-items: center;
+    padding: 20px 0px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.inner-flight-box:last-child {
+    border: none;
+}
+.inner-flight-box p {
+    width: 25%;
+    margin: 0;
+    text-align: center;
+    padding: 0 20px;
+}   
+.inner-flight-box p label {
+    display: block;
+    text-align: center;
+}
+.brand-image > img {
+    margin: -40px 0 -50px;
+}
+.brand-box:nth-child(3n) {
+    margin-right: 0;
+}
+.brand-box {
+    display: inline-block;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin: 0px 30px 30px 0;
+}
+.brand-name > p {
+    border: none;
+    padding: 0;
+    background: transparent;
+    font-size: 15px;
+    margin: 2px 0 0 7px;
+}
+/*Commented on purpose*/
+/*.msg-row.select {
+    margin-bottom: 20px !important;
+}*/
+.brand-name p.brand-fee {
+    margin: 0;
+    margin-left: auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: #53c8f4;
+    font-size: 18px;
+}
+.brand-name p span {
+    font-size: 16px;
+    text-align: right;
+    color: #999;
+    margin: 0 0 0 5px;
+}
+.brand-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.brand-name {
+    font-weight: 600;
+    font-size: 25px;
+    margin: 0 0 10px 0;
+    align-items: center;
+    text-transform: capitalize;
+}
+.brand-text button.btn.btn-success {
+    width: 100%;
+    padding: 9px 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 14px 0 0;
+    background-color: #103F54;
+    border-color: #103F54;
+}
+.brand-name {
+    display: flex;
+}
+.brand-text p.bullet-text span {
+    display: block;
+    position: relative;
+    margin: 0 0 7px 0;
+    font-size: 13px;
+}
+.gear-icon, .door-icon, .seat-icon {
+    background: url(https://i.ibb.co/LCRTrzN/gear-icon.png);
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-size: contain;
+}
+.door-icon {
+    background: url(https://i.ibb.co/hK7CWgz/door-icon.png);
+    background-size: contain;
+}
+.seat-icon {
+    background: url(https://icon-library.com/images/seat-icon/seat-icon-19.jpg);
+    background-size: contain;   
+}
+.hotel-column {
+    display: flex;
+    width: 85%;
+}
+.hotel-icon {
+    width: 15%;
+}
+.hotel-column strong {
+    display: block;
+}
+.hotel-icon i {
+    font-size: 50px;
+}
+.hotel-icon {
+    text-align: center;
+}
+.hotel-column p.bullet-text span {
+    width: 40%;
+    display: block;
+}
+.hotel-icon.town-car-icon .fa-clock-o {
+    font-size: 20px;
+    position: absolute;
+}
+.hotel-column p.bullet-text {
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 14px;
+}
+.hotel-icon .railcar-icon {
+    background: url(https://i.ibb.co/yqZvjgm/rail-icon.png) no-repeat;
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    display: inline-block;
+    margin: -8px 0;
+}
+button.btn.btn-success.disableIt {
+    background-color: #103F54;
+    border-color: #103F54;
+}
+input#search_item {
+    max-width: 80%;
+    padding-left: 40px;
+}
+.input-group .fa.fa-search {
+    position: absolute;
+    left: 15px;
+    z-index: 9;
+    top: 10px;
+    color: #555;
+}
+.accordion-box.append-box {
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    margin: 30px 0 0;
+}
+.accordion-box.append-box .top-title h3 {
+    color: #555;
+    margin: 10px 0 14px 0;
+    font-size: 18px;
+    margin: 0 0 0px 0px;
+    background-color: #fafafa;
+    display: inline-block;
+    position: relative;
+    bottom: 29px;
+    padding: 11px 30px;
+    border: 1px solid #ddd;
+}
+span.select2-container.select2-container--default.select2-container--open {
+    z-index: 9999;
+}
+.accordion-box-scroll .input-group {
+    display: flex;
+    align-items: center;
+}
+.accordion-box-scroll .input-group span.input-group-btn {
+    margin-left: auto;
+}
+/*.dtpicker-overlay {
+    z-index: 9999;
+}*/
+.loading-img {
+    margin-bottom: 15px;
+    padding: 0 20px;
+}
+.hotel-column .inner-left-text p {
+    width: 100%;
+    text-align: left;
+}
+.hotel-secton .modal-body img {
+    max-width: 100%;
+    height: auto;
+}
+.hotel-secton .modal-header {
+    flex-direction: column;
+}
+.hotel-secton .modal-body table.table.table-condensed td {
+    font-size: 13px;
+}
+.chat-body .modal-header h4 {
+    font-size: 18px;
+    padding: 0 30px 0 0;
+}
+.chat-modal .modal-header {
+    background-color: #103F54;
+    flex-direction: column;
+    border-radius: 0;
+    padding: 12px 20px;
+}
+.chat-modal .modal-header h4.modal-title {
+    color: #fff;
+}
+.chat-modal .modal-header button.close {
+    position: absolute;
+    right: 0;
+    color: #fff;
+    opacity: 1;
+    right: 20px;
+    top: 21px;
+}
+.chat-modal .modal-footer {
+    background-color: #103F54;
+    padding: 12px 17px;
+}
+.chat-modal button.btn.btn-danger {
+    background-color: #53c8f4;
+    border-color: #53c8f4;
+}
+.chat-modal button.btn.btn-primary {
+    background-color: #fff;
+    border-color: #fff;
+    color: #103F54;
+}
+.msg-row.select {
+    text-align: right;
+}
+.msg-row.select span.select2.select2-container.select2-container--default {
+    text-align: left;
+}
+.user-msg.sent {
+    padding-left: 70px;
+}
+.user-msg {
+    position: relative;
+}
+.avator-icon {
+    position: absolute;
+    left: 0;
+}
+.user-msg.receive .avator-icon {
+    left: auto;
+    right: 0;
+}
+.user-msg.receive {
+    padding-right: 70px;
+}
+.chat-head-logo img {
+    margin: -10px 15px -10px 0;
+}
+span.speaker-icon {
+    color: #fff;
+    font-size: 28px;
+    margin: 0 25px 0 0px;
+    line-height: 20px;
+    display: none;
+}
+.bot-speaking span.speaker-icon {
+    display: inline-block;
+}
+.complete-chat div.chat-body, .complete-chat .chat-footer, .complete-chat .left-chat-panel {
+    filter: blur(4px);
+}
+.complete-chat .chat-footer a {
+    pointer-events: none;
+}
+.flight-row.hotel-row:hover .hotel-icon i, .flight-row.hotel-row:hover .hotel-column p {
+    color: #fff;
+}
+.left-chat-panel {
+    width: 320px;
+    background-color: #fff;
+    box-shadow: 5px 0px 10px #ccc;
+    position: absolute;
+    left: 0;
+    height: calc(100% - 63px);
+    overflow: auto;
+    padding: 15px 15px;
+    top: 62px;
+    z-index: 99;
+}
+.chat-panel {
+    width: 100%;
+    margin: 0 0 15px 0px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.left-date p {
+    margin: 0;
+}
+.chat-panel-header h3 {
+    margin: 35px 0 0 0;
+    color: #103F54;
+    font-size: 18px;
+    padding: 2px 1px;
+    font-weight: 600;
+    text-align: center;
+    pointer-events: none;
+}
+.clickable-icons .chat-panel-header h3.ailine-name {
+    border: 1px dashed #103F54;
+    cursor: pointer;
+    pointer-events: all;
+}
+.chat-panel-body {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 12px;
+}
+.chat-panel-body p {
+    color: #676767;
+    margin: 0 0 13px 0;
+    font-size: 11px;
+    position: relative;
+    padding: 0 8px;
+    word-break: break-all;
+    text-align: center;
+    width: 50%;
+}
+.chat-panel-body p span {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+}
+.chat-panel-body p:last-child {
+    margin: 0;
+}
+.chat-panel-body p span {
+    color: #103F54;
+    font-weight: 600;
+    display: inline-block;
+}
+.open-reservation div#chat-body, .open-reservation .chat-footer {
+    padding-left: 340px;
+}
+div#left-chat-panel {
+    display: none;
+}
+.bootstrap-datetimepicker-widget span.glyphicon.glyphicon-chevron-down:before {
+    content: "\f078";
+}
+.bootstrap-datetimepicker-widget span.glyphicon.glyphicon-chevron-up:before {
+    content: "\f077";
+}
+.bootstrap-datetimepicker-widget  span.glyphicon {
+    font: normal normal normal 14px/1 FontAwesome;
+}
+.bootstrap-datetimepicker-widget .timepicker {
+    height: auto;
+    min-width: inherit;
+    max-width: inherit;
+    box-sizing: border-box;
+    border: none;
+    flex: 0 0 32%;
+}
+.bootstrap-datetimepicker-widget.usetwentyfour.timepicker-sbs .datepicker {
+    flex: 0 0 68%;
+    max-width: 68%;
+}
+.bootstrap-datetimepicker-widget table td.day {
+    font-size: 13px;
+}
+.bootstrap-datetimepicker-widget  th.picker-switch {
+    padding-bottom: 20px;
+}
+.bootstrap-datetimepicker-widget .row {
+    margin: 0;
+}
+.bootstrap-datetimepicker-widget  span.glyphicon.glyphicon-chevron-up {
+    padding-top: 35px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 32em;
+}
+.chat-panel-header h3 {
+    background: url(../../images_chatbot/reservation-icon-01.png) no-repeat;
+    background-position: left center;
+}
+.bootstrap-datetimepicker-widget.usetwentyfour .datepicker {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.chat-body ul.nav.nav-tabs li a {
+    border-radius: 0;
+    display: block;
+    padding: 10px 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    color: #222;
+    font-weight: 600;
+    background-color: #fff;
+    position: relative;
+    font-size: 12px;
+    margin: 0;
+}
+.chat-body ul.nav.nav-tabs li.active a {
+    background-color: #f8f8f8;
+    color: #1a3c53;
+    border-bottom-color: transparent;
+}
+.chat-body ul.nav.nav-pills {
+    display: flex;
+    margin: 0 0 15px;
+}
+.chat-body ul.nav.nav-pills li {
+    width: 50%;
+    padding: 0 3px;
+}
+.chat-body ul.nav.nav-pills li a {
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+    padding: 10px 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+}
+.chat-body ul.nav.nav-pills li a:hover {
+    background-color: #fff;
+    color: #103F54;
+}
+.chat-body .btn.dark-button {
+    background-color: #103F54;
+    border: 1px solid #103F54;
+}
+.chat-body .btn.dark-button {
+    background-color: #fff;
+    border: 1px solid #103F54;
+    color: #103F54;
+}
+.chat-body ul.nav.nav-pills li a:hover {
+    background-color: #fff;
+    color: #103F54;
+}
+.chat-body .recent-button {
+    background-color: #d2d2d2;
+    color: #103F54;
+    border: 1px solid #d2d2d2;
+}
+.chat-body .recent-button:hover {
+    background-color: #fff;
+}
+button.btn.dark-button.reservation-button {
+    width: 94%;
+    margin: 0 auto 20px;
+    display: block;
+}
+div#left-chat-panel-suggestion {
+    display: none;
+}
+button.btn.booking-button {
+    background-color: #53c8f4;
+    border: 1px solid #53c8f4;
+    width: 100%;
+    text-transform: uppercase;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 600;
+}
+button.btn.booking-button, .dark-button.reservation-button {
+    background-color: #53c8f4;
+    border: 1px solid #53c8f4;
+    width: 100%;
+    text-transform: uppercase;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 0;
+}
+button.btn.booking-button:hover {
+    background-color: #fff;
+    color: #53c8f4; 
+}
+.inner-left-chat-panel {
+    border: 1px solid #ddd;
+    border-top: none;
+}
+.inner-left-chat-panel .tab-content {
+    padding: 0 5px;
+    border-bottom: 30px;
+}
+.left-chat-panel .tab-content {
+    background-color: #f8f8f8;
+}
+.inner-tab-content {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 20px 10px 60px 10px;
+}
+.btn.light-grey-button, .nav.nav-pills a.btn.dark-blue-button {
+    background-color: #e1e1e1;
+    border: 1px solid #e1e1e1;
+    color: #1a3c53;
+}
+/*.btn.light-grey-button:hover {
+    background-color: #fff !important;
+    border: 1px solid #e1e1e1;
+    color: #1a3c53 !important;
+}*/
+
+
+
+.complete-chat .chat-alert {
+z-index: 999;
+}
+.btn.dark-blue-button, .active.btn.light-grey-button, .active.btn.light-grey-button:focus, 
+.nav.nav-pills a.btn.dark-blue-button:focus, .nav.nav-pills a.btn.dark-blue-button.active {
+    background-color: #193a55;
+    border: 1px solid #193a55;
+    color: #fff;
+    outline: 0;
+}
+button.btn.light-grey-button {
+    width: 100%;
+}
+p button.btn.dark-blue-button {
+    width: 100%;
+}
+.rerservation-button {
+    margin: -58px auto 20px;
+    width: 91%;
+}
+.inner-chat-aero-info:before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #193a55;
+    border-radius: 50%;
+    z-index: 1;
+    background-color: #fff;
+    top: 7px;
+    left: 0;
+}
+.inner-chat-aero-info:after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background-color: #193a55;
+    left: 4px;
+    top: 10.5px;
+    z-index: 9;
+    border-radius: 50%;
+}
+.chat-aero-info:after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #193a55;
+    border-radius: 50%;
+    z-index: 1;
+    background-color: #fff;
+    right: 0;
+    top: 7px;
+}
+.chat-aero-info:before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #193a55;
+    position: absolute;
+    left: 0;
+    top: 14px;
+}
+.chat-aero-info {
+    position: relative;
+    height: 40px;
+    text-align: center;
+    margin: 15px 0;
+}
+.inner-chat-aero-info .fa-plane {
+    color: #193a55;
+    font-size: 38px;
+    transform: rotate(45deg);
+    position: relative;
+    bottom: -4px;
+}
+.chat-aero-info.back .fa-plane {
+    transform: rotate(226deg);
+    position: relative;
+    bottom: 6px;
+}
+.back .inner-chat-aero-info:after {
+    left: auto;
+    right: 4px;
+}
+.tab-content .fade {
+    display: none;
+}
+.tab-content .fade.active.in {
+    display: block;
+    opacity: 1;
+}
+.chat-panel-header img {
+    max-height: 38px;
+    position: relative;
+    z-index: 9;
+    background-color: #f8f8f8;
+    bottom: 7px;
+}
+.chat-panel-header span {
+    display: inline-block;
+    text-align: center;
+}
+.travel-info .chat-panel-body p span {
+    font-size: 12px;
+}
+.travel-info .chat-panel-body p {
+    text-align: left;
+}
+.chat-panel-header {
+    text-align: center;
+    position: relative;
+}
+span.left-date {
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    font-size: 11px;
+    text-align: left;
+}
+span.left-date.right {
+    left: auto;
+    right: 0;
+    text-align: right;
+}
+.chat-panel-header h3 + p {
+    margin: 5px 0 20px;
+    font-size: 12px;
+}
+.inner-chat-aero-info.hotel-box .center-location {
+    top: -32px;
+}
+.inner-chat-aero-info.hotel-box {
+    margin-top: 50px;
+}
+.chat-panel-body p span.city {
+    font-size: 20px;
+}
+.left-chat-panel ul.nav.nav-tabs li {
+    width: 50%;
+    text-align: center;
+}
+.left-chat-panel ul.nav.nav-tabs li a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    color: #555;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    text-decoration: none;
+}
+/*.left-chat-panel ul.nav.nav-tabs li:last-child a {
+    border-color: transparent;
+}*/
+.inner-tab-content ul.nav.nav-pills li {
+    width: 49%;
+}
+.inner-tab-content ul.nav.nav-pills li a {
+    display: block;
+}
+.nav.nav-pills a.btn {
+    padding: 10px 15px;
+    font-size: 14px;
+}
+.nav.nav-pills li:last-child {
+    margin-left: auto;
+}
+.left-chat-panel ul.nav.nav-tabs li a.active {
+    border-color: #ddd;
+    border-bottom-color: transparent;
+    background-color: #f8f8f8;
+}
+.nav-tabs>li {
+    float: left;
+    margin-bottom: 0px;
+}
+.right-edit-dropdown {
+    position: absolute;
+    right: 0;
+}
+.action-dropdown {
+    display: none;
+    background-color: #747474;
+    box-shadow: 0 0 10px #fff;
+    position: absolute;
+    right: -9px;
+    z-index: 99999;
+    padding: 10px 0px;
+    border-radius: 5px;
+    min-width: 115px;
+    top: 37px;
+    opacity: 1;
+    left: auto;
+}
+.right-edit-dropdown > a {
+    font-size: 17px;
+    color: #103F54;
+    margin: 0 0 0 12px;
+}
+.right-edit-dropdown {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    left: 0;
+}
+.action-dropdown a {
+    display: block;
+    color: #fff;
+    white-space: nowrap;
+    text-align: left;
+    padding: 5px 15px;
+    font-size: 13px;
+}
+.action-dropdown a i {
+    margin: 0 6px 0 0;
+}
+.action-dropdown:before {
+    border-bottom: 8px solid #747474;
+    border-left: 6px solid rgba(0, 0, 0, 0);
+    border-right: 6px solid rgba(0, 0, 0, 0);
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: -7px;
+}
+.right-edit-dropdown > a:after {
+    content: none;
+}
+.change-plain-button a {
+    background-color: #193a55;
+    border: 1px solid #193a55;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.change-plain-button {
+    text-align: center;
+    margin: 15px 0 10px;
+}
+.chat-panel.editable {
+    background-color: #ffff;
+    padding: 30px 20px 20px 20px;
+    margin: 10px 0px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 18px #bbb;
+    position: relative;
+}
+.travel-information h2 {
+    color: #103F54;
+    font-size: 25px;
+    font-weight: 900;
+    margin: 0 0 15px 0;
+}
+.f-info-column p {
+    color: #676767;
+    font-size: 18px;
+    margin: 0 0 12px 0;
+}
+.f-info-column h4 {
+    color: #103F54;
+    font-size: 22px;
+}
+.travel-information {
+    margin: 0 0 25px 0;
+}
+.info-hours {
+    background-color: #eeeeee;
+    text-align: center;
+    margin: 15px 0 0;
+    padding: 15px 20px;
+}
+.info-hours span {
+    color: #103F54;
+    font-size: 20px;
+}
+.flight-information-popup button.close {
+    background-color: #103F54;
+    border:1px solid  #103F54;
+    opacity: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    right: 10px;
+    position: absolute;
+    color: #fff;
+    top: 10px;
+    cursor: pointer;
+    z-index: 9;
+}
+.flight-information-popup button.close:hover {
+    background-color: transparent;
+    color: #103F54;
+}
+.sm-locate-alerts p {
+    font-size: 11px;
+    text-align: left;
+}
+
+.sm-locate-alerts {
+    border: 1px solid #fff;
+    background-color: #fff;
+    position: absolute;
+    bottom: 55px;
+    padding: 12px 12px;
+    border-radius: 8px;
+    z-index: 99;
+    box-shadow: 0 0 6px #ddd;
+    right: 0px;
+    transform: scale(0);
+    opacity: 0;
+}
+.sm-locate-alerts:before {
+    border-bottom: 14px solid #fff;
+    border-left: 10px solid rgba(0, 0, 0, 0);
+    border-right: 10px solid rgba(0, 0, 0, 0);
+    content: "";
+    position: absolute;
+    right: auto;
+    bottom: -14px;
+    margin: auto;
+    left: auto;
+    transform: translate(25px, 0px) rotate(
+180deg);
+}
+.location-stops strong {
+    color: #575757;
+    font-size: 15px;
+}
+.location-stops strong i {
+    color: blue;
+}
+.location-stops strong:hover + p + .sm-locate-alerts {
+    transform: scale(1);
+    opacity: 1;
+}
+.center-location {
+    position: relative;
+    top: -72px;
+}
+.inner-chat-aero-info {
+    margin-top: 100px;
+}
+.location-stops > p {
+    color: #575757;
+    font-size: 12px;
+}
+strong.flight-sm-date {
+    display: block;
+    padding: 2px 4px 0;
+    pointer-events: none;
+    min-width: 105px;
+}
+.clickable-icons strong.flight-sm-date {
+    border: 1px dashed #212529;
+    cursor: pointer;
+    pointer-events: all;
+}
+.com-resr-text p {
+    font-size: 16px;
+    color: #666;
+}
+.left-date strong.flight-sm-date {
+    border-right: none;
+}
+.clickable-icons .left-date.right strong.flight-sm-date {
+    border-left: none;
+    border-right: 1px dashed;
+}
+.com-resr-text p span {
+    font-weight: 600;
+    font-size: 20px;
+    display: block;
+    margin: 0 0 14px 0;
+    color: #103F54;
+}
+.cst-edit .left-date strong.flight-sm-date {
+    min-width: inherit;
+    border-right: 1px dashed;
+}
+.cst-edit .left-date.right strong.flight-sm-date {
+    border-left: 1px dashed;
+}
+.com-resr-text {
+    text-align: center;
+    padding: 20px 20px 0;
+}
+.com-res-img {
+    text-align: center;
+}
+.com-res-img img {
+    max-width: 150px;
+}
+button.close-popup {
+    border: 1px solid #103F54;
+    background-color: #103F54;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+.panel-alert {
+    background-color: #103F54;
+    width: 100%;
+    margin: 0 0 0 0;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    font-size: 12px;
+    padding: 6px 10px;
+    color: #fff;
+    display: none;
+}
+.panel-alert a {
+    background-color: #fff;
+    color: #103F54;
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+    height: 29px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 29px;
+    border: 1px solid #103F54;
+    font-size: 16px;
+}
+.clickable-icons .panel-alert {
+    display: block;
+}
+.chat-panel-header .hotel-state {
+    margin: 12px 0 0;
+}
+.msg-row .user-msg + p + .msg-row.select {
+    margin-top: 15px !important;
+}
+.chat-panel-body + p.price-tag {
+    font-size: 18px;
+    text-align: center;
+    color: #103F54;
+}
+
+
+.car-rental-boxes .inner-left-text {
+    padding-right: 50px;
+}
+.car-rental-boxes .brand-name {
+    width: 100%;
+}
+.car-rental-boxes .inner-right-button {
+    width: 80%;
+    flex-wrap: wrap;
+}
+.car-rental-boxes .inner-right-button button.btn.btn-success {
+    font-size: 15px;
+    padding: 6px 20px;
+    position: absolute;
+    right: 15px;
+    bottom: 29px;
+}
+.hotel-column.left.car-rental-boxes {
+    align-items: center;
+}
+.car-rental-boxes img {
+    height: auto;
+    max-height: 150px;
+    width: auto;
+    max-width: 150px;
+}
+.daterangepicker.dropdown-menu.ltr.show-calendar:before {
+    top: auto;
+    bottom: -7px;
+    transform: rotate(180deg);
+    left: 50px;
+}
+.daterangepicker.dropdown-menu.ltr.show-calendar {
+    top: auto !important;
+    bottom: 86px;
+}
+body.hang-scroll {
+    overflow: hidden;
+    position: inherit !important;
+}
+/* .preffered {
+    border-left: 10px solid green;
+}
+
+.not-preffered {
+    border-left: 10px solid red;
+} */
+.daterangepicker.dropdown-menu.ltr.show-calendar:after {
+    content: none;
+}
+.range_inputs button.cancelBtn.btn {
+    display: none;
+}
+.car-rental-boxes .brand-name img {
+    max-width: 38px;
+    max-height: 38px;
+    margin: 0 12px 0 0;
+}
+.preffered-tag {
+    position: absolute;
+    left: -35px;
+    top: 17px;
+    background-color: green;
+    color: #fff;
+    font-size: 12px;
+    padding: 7px 20px;
+    transform: rotate(-40deg);
+    z-index: 99;
+    min-width: 150px;
+    text-align: center;
+}
+.not-preffered .preffered-tag {
+    background-color: red;
+}
+.new-reservation .chat-panel:last-child {
+    border-bottom: none;
+}
+.new-reservation .chat-panel {
+    padding: 20px 20px;
+    margin: 0;
+}
+.new-reservation {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+.chat-panel-body p.full-width {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+}
+.new-reservation .policy-tag-img img {
+    position: static;
+}
+.new-reservation .policy-tag-img {
+    display: block;
+    text-align: left;
+    margin: 0px 0 10px 0px;
+}
+.new-reservation .chat-panel-header h3 {
+    margin: 0;
+}
+.new-reservation .chat-panel-header .chat-aero-info + h3 {
+    margin-top: 50px;
+}
+h3.new-reservation-title {
+    font-size: 22px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 0 -1px;
+    padding: 14px 20px;
+    color: #063b54;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: #f8f8f8;
+}
+div#flight-left-pannel .chat-panel-body, div#hotel-left-pannel .chat-panel-body, div#rental_car-left-pannel .chat-panel-body {
+    justify-content: center;
+    width: 100%;
+}
+div#flight-left-pannel .chat-panel-body p, div#hotel-left-pannel .chat-panel-body p, div#rental_car-left-pannel .chat-panel-body p {
+    padding: 0;
+    white-space: nowrap;
+}
+.translate-loader h3 {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    color: #103F54;
+    text-shadow: 0 1px #777;
+    /* font-weight: 600; */
+}
+div#flight-left-pannel .chat-panel-body p.flight_city_name,
+div#rental_car-left-pannel .chat-panel-body p.flight_city_name,
+div#hotel-left-pannel .chat-panel-body p.flight_city_name {
+    white-space: normal;
+}
+.container.closet-match-form label {
+    font-weight: 600;
+}
+.container.closet-match-form {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: 0;
+}
+.container.closet-match-form .form-group label.radio-inline {
+    font-weight: 500;
+}
+.container.closet-match-form .form-group label.radio-inline input {
+    margin: 7px 8px 0 0;
+    transform: scale(1.2);
+    float: left;
+}
+.row.time-row label.radio-inline, .row label.color-fade {
+    color: #555;
+    font-weight: 500;
+}
+.select-caret:before {
+    content: "";
+    border-color: #888 transparent transparent transparent;
+    border-style: solid;
+    border-width: 7px 6px 0 6px;
+    height: 0;
+    left: auto;
+    margin-left: -4px;
+    margin-top: -2px;
+    position: absolute;
+    top: 50%;
+    width: 0;
+    right: 10px;
+}
+.select-caret {
+    position: relative;
+}
+.select-caret select.custom-select {
+    background: #fff;
+}
+.disabled-dropdowns {
+    opacity: 0.3;
+    pointer-events: none;
+    }
+/* body > span.select2-container.select2-container--default.select2-container--open {
+    margin: -10px 0 0 0;
+} */
+@media (max-width: 992px) {
+.form-group.travel-form-group {
+    flex-wrap: wrap;
+}
+.chat-loadding img {
+    max-width: 100px;
+}
+}
+@media (max-width: 767px) {
+.msg-body .select2-container--default, .msg-body .select2-container--default .select2-selection--single, .timePicker {
+    max-width: 100%;
+    min-width: 100%;
+}
+.flight-row.responsive-row {
+    display: block;
+    position: relative;
+    background-color: #fafafa;
+    margin: -10px 0 10px 0;
+}
+.accordion-row .right-fare label {
+    display: none;
+}
+.flight-career {
+    display: none;
+}
+.flight-row.responsive-row .right-fare label, .flight-row.responsive-row .flight-career   {
+    display: inline-block;
+    position: static;
+}
+.responsive-row .right-fare {
+    position: static;
+}
+.responsive-row .flight-column {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.flight-career span {
+    display: inline-block;
+    width: auto;
+}
+.flight-career h5 {
+    margin: 0 0 8px 0;
+    min-width: 150px;
+}
+.flight-column span img {
+    max-width: 32px;
+}
+}
+@media (max-width: 600px) { 
+.form-group.travel-form-group {
+    width: 100%;
+}
+.form-group.travel-form-group button.btn.btn-default {
+    margin: 10px 0 0;
+    width: 100%;
+}
+}

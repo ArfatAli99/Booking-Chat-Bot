@@ -1,0 +1,41 @@
+{
+  "name": "ATGBookingBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "country-codes-list": "^1.6.8",
+    "country-list": "^2.2.0",
+    "country-locale-map": "^1.4.12",
+    "country-state-city": "^3.0.0",
+    "dateformat": "^4.5.1",
+    "debug": "^2.6.9",
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.3",
+    "geoip-lite": "^1.4.2",
+    "https": "^1.0.0",
+    "ibm-watson": "^6.0.2",
+    "iso-639-1": "^2.1.8",
+    "mediaserver": "^0.1.1",
+    "moment": "^2.29.1",
+    "mssql": "^6.3.1",
+    "ngrok": "^4.2.2",
+    "nodemon": "^2.0.12",
+    "openssl-nodejs": "^1.0.5",
+    "qs": "^6.10.1",
+    "short-uuid": "^4.2.0",
+    "should-send-same-site-none": "^2.0.5",
+    "simple-random-number-generator": "^1.2.0",
+    "socket.io": "^3.1.1",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.7",
+    "xml2js": "^0.4.23"
+  }
+}
